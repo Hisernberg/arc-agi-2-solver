@@ -1,0 +1,22 @@
+# ARC-AGI-2 Solver Dependencies
+# For local development only (Kaggle environment has these pre-installed)
+
+# Core ML
+torch>=2.0.0
+transformers>=4.40.0
+unsloth>=2024.4.0
+peft>=0.10.0
+datasets>=2.14.0
+tqdm>=4.65.0
+
+# Utilities
+numpy>=1.24.0
+scipy>=1.11.0
+msgpack>=1.0.0
+bzip2>=1.0  # standard library
+
+# Kaggle
+kaggle>=1.5.0
+
+# Code quality
+ruff>=0.3.0

@@ -1,0 +1,7 @@
+*.zip
+*.pkl
+*.bz2
+checkpoints/
+results/
+__pycache__/
+*.log
