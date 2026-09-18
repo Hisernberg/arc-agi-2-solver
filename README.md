@@ -1,93 +1,74 @@
-# ARC-AGI-2 Project
+# ARC-AGI-2 Competition Solver
 
-**Leaderboard Score: 0.340 (baseline)** — [Submit your model](https://kaggle.com/competitions/arc-agi-2)
+## Overview
+This project implements a **neuro-symbolic hybrid approach** to solve ARC-AGI-2 abstract reasoning tasks on Kaggle, combining:
+- **NVARC**: Qwen3-4B with per-task LoRA test-time training
+- **DSL Program Search**: 15 ARC primitives with BFS program synthesis  
+- **Refinement Loop**: Holistic Trace Judging + cross-view verification
+- **Hybrid Ensemble**: Neural + Symbolic + Algorithmic scoring fusion
 
-Multi-model ensemble system for the [ARC-AGI-2 competition](https://kaggle.com/competitions/arc-agi-2), building on the 2024 ARC Prize and NVARC traditions. The system combines rule-based solvers, reinforcement learning agents, and large-language-model pipelines into a unified submission harness.
-
----
+## Kaggle Notebooks
+1. **arc-agi2-highscore-lb33-89-replica** - Baseline NVARC v1 (Complete: 62.5% on 4 eval tasks)
+2. **arc-agi2-v2-neurosymbolic** - Enhanced with DSL + Refinement (Ready for submission)
 
 ## Architecture
-
 ```
-notebooks/
-├── arc_agi2_master.ipynb     # Primary submission (rule-based + LLM hybrid)
-├── arc_agi2_rl.ipynb          # RL-enhanced solver agents
-└── arc_agi2_ensemble.ipynb    # Multi-model voting pipeline
-
-scripts/
-├── harness.py                 # Main submission runner (evaluates & submits)
-├── kaggle_submit.py           # Kaggle API submission wrapper
-├── eval_checker.py            # Score validation and diagnostic output
-├── ensemble.py                # Model combination and voting logic
-├── rl_solver.py               # RL agent training and inference
-└── github_sync.py             # GitHub sync, branching, tagging, releases
+Input Grids → Grid Tokenizer → Qwen3-4B (LoRA TTT) → Turbo DFS → Candidate Pool
+                                                                     ↓
+                                        DSL Program Search (parallel) → 
+                                                                     ↓
+                              Holistic Trace Judging (min-NLL) + Ensemble Scoring
+                                                                     ↓
+                                    Top-2 Candidates → submission.json
 ```
 
-## Quick Start
+## Research Basis
+- **"Modality-Driven Search with Holistic Trace Judging"** (Semi-private eval: 72.9%)
+- **"ARC Prize 2025: Technical Report"** (Refinement loops as defining theme)
+- **"GPT-5.2 & ARC-AGI-2 Benchmark Analysis"** (SOTA progression tracking)
+- **NVARC** (ARC Prize 2025 winner open-source implementation)
 
+## Key Innovations
+1. **Min-NLL scoring** instead of mean-NLL (fixes over-scoring)
+2. **Holistic Trace Judging**: Judge entire candidate trace holistically
+3. **DSL Program Search**: For low-confidence neural predictions
+4. **Refinement Loop**: Self-verification using cross-view consistency
+5. **Hybrid Ensemble**: Weighted fusion of scoring functions
+
+## Files
+- `notebooks/arc_agi2_v2_neurosymbolic.ipynb` — Main notebook (Phase 1+2+3)
+- `notebooks/arc_agi2_highscore_lb3389.ipynb` — Baseline replica
+- `scripts/arc_loader_full.py` — Grid tokenizer + augmentation
+- `scripts/arc_solver_full.py` — Per-task LoRA + turbo DFS
+- `scripts/arc_decoder_full.py` — Candidate scoring (multiple algorithms)
+- `scripts/starter_full.py` — Multi-worker orchestration
+- `scripts/kaggle_submit.py` — Kaggle API manager
+- `scripts/github_sync.py` — GitHub integration
+- `docs/PLAN.md` — Strategy plan
+- `docs/METHODOLOGY.md` — Technical approach
+
+## Status
+- ✅ GitHub repository synced
+- ✅ v1 notebook completed on Kaggle (62.5% eval)
+- ✅ v2 notebook pushed to Kaggle (ready for full run)
+- 🔄 Waiting for v1 leaderboard score
+- 📋 Next submission planned after analysis
+
+## Kaggle Links
+- [arc-agi2-highscore-lb33-89-replica](https://www.kaggle.com/code/kragglenote2forwork/arc-agi2-highscore-lb33-89-replica)
+- [arc-agi2-v2-neurosymbolic](https://www.kaggle.com/code/kragglenote2forwork/arc-agi2-v2-neuro-symbolic-refinement-loop)
+
+## Usage
 ```bash
-# Install dependencies
-pip install -r requirements.txt
+# Setup Kaggle credentials
+python scripts/kaggle_submit.py init
 
-# Run evaluation locally
-python scripts/harness.py --mode eval
+# Score local submission on eval set
+python scripts/kaggle_submit.py score-eval --submission results/submission.json
 
-# Run full submission pipeline
-python scripts/harness.py --mode submit
-
-# Sync to GitHub
-python scripts/github_sync.py --push --create-release
-
-# Branch for new attempt
-python scripts/github_sync.py --branch attempt-2 --message "RL solver v2"
+# Validate schema
+python scripts/kaggle_submit.py validate --submission results/submission.json
 ```
 
-## Competition Details
-
-- **Competition**: ARC-AGI-2 (Kaggle)
-- **Dataset**: 100 private evaluation tasks + public training set
-- **Metric**: Percentage of tasks solved correctly (0-1)
-- **Baseline**: 0.340 (minimal rule-based)
-- **Current best**: 0.340
-
-## Score History
-
-| Version | Branch/Tag  | Score | Method                        |
-|---------|-------------|-------|-------------------------------|
-| v0.1.0  | baseline    | 0.340 | Minimal pattern-matching       |
-
-## Methods
-
-### Rule-Based Solver
-Hand-crafted pattern matchers for common ARC task families:
-- Color counting and histogram analysis
-- Grid symmetry detection (horizontal, vertical, rotational)
-- Object counting with bounding-box heuristics
-- Path-finding on grid graphs
-- Line/edge detection via convolution filters
-
-### RL Enhancement
-Policy-gradient agents trained on training-set tasks to:
-- Predict which solver family to apply
-- Tune numeric hyperparameters (thresholds, offsets)
-- Retry on failure with alternative strategies
-
-### LLM Fallback
-GPT-4 / Claude-3 pipeline for unseen task types:
-- In-prompt grid-to-text conversion
-- Few-shot examples from training set
-- Structured output parsing (CoT -> grid)
-
-## Reproducibility
-
-```bash
-git clone https://github.com/Hisernberg/arc-agi-2.git
-cd arc-agi-2
-kaggle competitions download -c arc-agi-2
-unzip arc-prize-2026-arc-agi-2.zip -d dataset/
-python scripts/harness.py --mode eval
-```
-
-## License
-
-MIT License
+---
+*Built for ARC Prize 2026 - ARC-AGI-2 Competition | Target: 85%+ accuracy*
