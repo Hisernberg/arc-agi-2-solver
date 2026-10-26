@@ -58,3 +58,19 @@ Neuro-symbolic hybrid approach: Qwen3-4B LoRA TTT + DSL Program Search + Holisti
 **Receipt 10:12 UTC Oct-26**: commit ALL GATES PASS (120 tasks / 91,636 cells / both-[[0]]=0);
 G4 boot receipt = `qwen3-8-27b-fp8-repacked-v1` (proven Qwen3.8-27B leg served as directed);
 **SUBMITTED ref 57662636** — scored rerun in flight, score Oct-27 morning.
+
+## Oct-26 evening — gold push plan + v40 staged (3.8 series locked)
+
+- **Model doctrine**: Qwen3.8-27B FP8 (`qwen3-8-27b-fp8-repacked-v1`) = every remaining ARC-2
+  slot (user directive; boot-receipted in v39 ref 57662636). Qwen3.8-Flash-Next (125B-A6B,
+  `qwen4_exp`, NVFP4) = ARC-3 track only — not mountable on the L4×4 vLLM 0.19 pin.
+- **Tool lane CLOSED with receipts** (`oct26_v40/toolfill_receipts_v2.json`): widened space
+  (dihedral×cmap + shift + tile + kron) → train 17 fired, 16/17 transfer P=0.941; **eval 0/120**.
+- **v40 staged** (`oct26_v40/`): proven 3.8 leg + ONE lever = low-effort council refill
+  (`ARC_V40_COUNCIL=1`: v34-A refill jobs as no-think fast-pass, ~10× cheaper → more distinct
+  a2 candidates in the leftover window; kill switch → byte-identical v34 refill). Gates all pass.
+- **Gold push plan**: `oct26_v40/ARC26_Gold_Push_Plan_Oct26_v1.md` — day-by-day Oct 27 → Nov 2,
+  lever ledger L1–L10, 40+ honesty box (ARC-2 target = silver cement 33.89; the only 40+ door
+  = ARC-3 lane, bounded bet, kill rule Oct-29 EOD), Track B never touches ARC-2 slots.
+- Rollback receipt: session files lost to a sandbox reset were RESTORED from this mirror
+  (commits 5a69eb9/42b81c2) — mirror discipline works; keep pushing every artifact.

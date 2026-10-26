@@ -1,0 +1,17 @@
+{
+ "space": "D8xCMap + shiftxCMap + tile/kron xD8xCMap",
+ "train_fired": 17,
+ "train_correct": 16,
+ "train_transfer": 0.9412,
+ "train_multi": 0,
+ "census": {
+  "d8": 11,
+  "shift": 2,
+  "kron": 3,
+  "tile": 1
+ },
+ "eval_fired": 0,
+ "eval_pairs": 0,
+ "eval_would_credit": 0.0,
+ "eval_fired_ids": []
+}
