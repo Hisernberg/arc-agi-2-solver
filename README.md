@@ -41,3 +41,16 @@ Neuro-symbolic hybrid approach: Qwen3-4B LoRA TTT + DSL Program Search + Holisti
 
 ---
 *Target: 85%+ accuracy | Built for ARC Prize 2026*
+
+## Oct-26 — v39: proven Qwen3.8-27B leg strike (user directive)
+
+- Built + pushed `arc26-nvarc-v39` (sha f03274cb): v34b-core lineage (band 27.36–30.97, PB 32.64)
+  + shape-aware attempt_2 (ref 57630786) with `ARC_V38_LEG_SWAP` FORCED 0 — the proven
+  `qwen3-8-27b-fp8-repacked-v1` model source boots; Tufa Qwen3.6 glob inert.
+- **Verified-tool degenerate fill** implemented in-cell and PARKED (`ARC_V39_TOOLFILL=0`):
+  dihedral(8) × color-permutation unique-exact sweep over all train pairs; fires only on
+  both-`[[0]]` lost entries. Local receipts (full 1,120-task sweep, `oct26_v39/toolfill_receipts.json`):
+  train 11/1000 fired, **11/11 transfer P=1.000** (4 color-only, 7 rotation-only); eval **0/120 fired**
+  → zero EV today; one flag from arming. Tool lane widens Oct-27 (translation, tiling, object ops).
+- Build gates: byte-identity cells 1-19/21-29/31/33-35 exact + cell-20 append-only + AST clean.
+- Chain: `oct26_v39/*.sanitized.py` (build → push → status → gate → submit; tokens rotated out).

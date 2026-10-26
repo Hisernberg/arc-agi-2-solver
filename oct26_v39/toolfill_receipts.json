@@ -1,0 +1,14 @@
+{
+ "train_fired": 11,
+ "train_correct": 11,
+ "train_transfer": 1.0,
+ "train_multi": 0,
+ "census": {
+  "color-only": 4,
+  "rotation-only": 7
+ },
+ "eval_fired": 0,
+ "eval_pairs": 0,
+ "eval_correct_pairs": 0,
+ "eval_fired_ids": []
+}
