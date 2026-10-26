@@ -54,3 +54,7 @@ Neuro-symbolic hybrid approach: Qwen3-4B LoRA TTT + DSL Program Search + Holisti
   → zero EV today; one flag from arming. Tool lane widens Oct-27 (translation, tiling, object ops).
 - Build gates: byte-identity cells 1-19/21-29/31/33-35 exact + cell-20 append-only + AST clean.
 - Chain: `oct26_v39/*.sanitized.py` (build → push → status → gate → submit; tokens rotated out).
+
+**Receipt 10:12 UTC Oct-26**: commit ALL GATES PASS (120 tasks / 91,636 cells / both-[[0]]=0);
+G4 boot receipt = `qwen3-8-27b-fp8-repacked-v1` (proven Qwen3.8-27B leg served as directed);
+**SUBMITTED ref 57662636** — scored rerun in flight, score Oct-27 morning.
