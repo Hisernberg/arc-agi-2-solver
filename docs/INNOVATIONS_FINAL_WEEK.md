@@ -56,3 +56,15 @@
 - **Do not submit anything that hasn't committed green.** Every band-bottom draw so far came from an untested or known-regressive build (v35 21.94).
 - **Do not burn a slot on Track-B ARC-3 hardware probes from an ARC-2 submission.**
 - **The tool lane stays parked** — eval is closed to unique-exact rule families (0/120 twice).
+
+## 7. v19 vs v40-R — architecture diff (cell level)
+
+| | **v19** (`dasshovon/arc26-nvarc-v1` v19) | **v40-R** (`kragglenote2forwork/arc26-nvarc-v40-r-council-refill-redraw` v1) |
+|---|---|---|
+| Base | Faithful koushikrudra/failed-in-aimo LB-33.89 replica (13 cells, byte-identical submission+merge cells) | v34/v33 lineage — 426-idea corpus, doctrine "daily NEW code" |
+| Models | Qwen3-4B SFT+TTT induction core (`arc_solver.py`/`arc_induction_v2.py`, ~44k LOC); leg C pre-pass Qwen2.5-Coder-7B on 4×L4 (verified-induction) | Same base + **Qwen3.8-27B-FP8 leg** mounted on `foysalemonshanto/qwen3-8-27b-fp8-repacked-v1` |
+| Innovation | Inert scoreability net: leg-C produces candidates but commits nothing beyond base (fails-safe to no-op) | **Council refill** (`ARC_V34_REFILL=1` + `LARGEST_FIRST`): refills distinct a2 candidates in the leftover window — targets pool recall, the binding constraint |
+| Receipts | Draws 29.72 / 32.64 / 31.39 (~31 band) | leg_gate PASS, 27B leg up (24 seqs, ~470 tok/s), 5/12 debug exact, `council_samples=0`, pool precision 1.0 — **commit-proven, never submitted** |
+| Risk | Lowest — pinned recipe | One lever on a proven commit; unbounded upside unknown, floor similar (~28–31 band) |
+
+**Verdict:** v19 = best proven band; v40-R = the only receipted untried lever aimed at the actual constraint (pool recall 32.7%). Oct-31 slot goes to v40-R for information + upside; Nov-2 falls back to v19 unless v40-R lands >32.64.
